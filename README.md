@@ -11,7 +11,7 @@ and an order with these products is created (4). Finally, an orderId to identify
 
 ## General remarks
 
-I've added a lot of design thoughts as dedicated comments marked via `REMARK` and separated via indentation and blank lines.
+I've added 46 design thoughts as dedicated comments marked via `REMARK` and separated via indentation and blank lines.
 
 - The order service is technically quite simple and does not contain many domain nor technical features, but shows how to 
   implement the basic interservice communication as well as an integration tests (where the stock service is stubbed). 
