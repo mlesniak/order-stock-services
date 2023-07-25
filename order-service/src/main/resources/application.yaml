@@ -1,0 +1,21 @@
+server:
+  port: 8081
+
+logging:
+  level:
+    root: INFO
+    com.mlesniak: INFO
+
+spring:
+  main:
+    banner-mode: off
+    log-startup-info: false
+
+  data:
+    mongodb:
+      # REMARK For development purposes we do not use any authentication.
+      uri: mongodb://localhost:27017/shop-system
+
+clients:
+  stock-service:
+    url: http://localhost:8080

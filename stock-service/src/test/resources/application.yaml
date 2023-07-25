@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      database: shop-system
+      uri: mongodb://localhost:${mongodb.container.port}/${spring.data.mongodb.database}

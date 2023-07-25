@@ -1,0 +1,3 @@
+clients:
+  stock-service:
+    url: http://localhost:18080
