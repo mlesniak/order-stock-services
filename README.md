@@ -266,7 +266,7 @@ X-Request-Id: 34c5708b-911b-4043-b17e-7faa48a780a4
 }
 ```
 
-By querying the stock service we can check that the corresponding quantites are still sound, i.e. the failed request did not change existing stock quantities:
+By querying the stock service we can check that the corresponding quantities are still sound, i.e. the failed request did not change existing stock quantities:
 ```bash
 $ http :8080/stock/1
 HTTP/1.1 200
