@@ -149,9 +149,6 @@ Keep-Alive: timeout=60
 X-Request-Id: d33bf249-92b9-4f20-a55b-b4d4231b82f4
 ```
 
-
-
-{"orders":[{"productId":1,"quantity":5},{"productId":2,"quantity":10}]}
 Now, we can order 5 items of product 1 and 10 items of product 2:
 ```bash
 $ echo '{"orders":[{"productId":1,"quantity":5},{"productId":2,"quantity":10}]}'|http -v POST :8081/order
