@@ -39,7 +39,7 @@ I've added 46 design thoughts as dedicated comments marked via `REMARK` and sepa
 
 Prerequisites: Docker, Docker Compose, Gradle, a recent JDK and [httpie](https://httpie.io/) are installed. 
 
-We show how to manually start the services and perform HTTP requests. Alternatively, below, you can find a script do
+We show how to manually start the services and perform HTTP requests. Alternatively, below, you can find a script to
 create docker containers and use the corresponding global docker-compose file to start everything via docker-compose.
 
 Start the database
