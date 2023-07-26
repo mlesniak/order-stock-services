@@ -1,0 +1,37 @@
+services:
+  mongodb:
+    image: 'mongo:latest'
+    environment:
+      - 'MONGO_INITDB_DATABASE=shop-system'
+    ports:
+      # Port mapping is host:container
+      - '27017:27017'
+    entrypoint: ["/usr/bin/mongod","--bind_ip_all","--replSet","rs0"]
+
+  # Transactions work only in sessions which only work in replica sets.
+  # Hence, let's create a single instance and initiate a replica set.
+  mongoinit:
+    image: mongo:latest
+    restart: "no"
+    depends_on:
+      - mongodb
+    entrypoint: [ "bash", "-c", "sleep 3 && mongosh --host mongodb:27017 --eval 'rs.initiate()'" ]
+
+  stock-service:
+    image: 'stock-service:0.0.1-SNAPSHOT'
+    depends_on:
+      - mongodb
+    environment:
+        - 'SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/shop-system'
+    ports:
+      - '8080:8080'
+
+  order-service:
+    image: 'order-service:0.0.1-SNAPSHOT'
+    depends_on:
+      - mongodb
+    environment:
+      - 'SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/shop-system'
+      - 'CLIENTS_STOCK_SERVICE_URL=http://stock-service:8080'
+    ports:
+      - '8081:8081'

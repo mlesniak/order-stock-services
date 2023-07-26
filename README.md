@@ -36,10 +36,11 @@ I've added 46 design thoughts as dedicated comments marked via `REMARK` and sepa
   `status` field since it is not really necessary with appropriate HTTP status codes.
 
 ## Example
-complete exam,ple with docker compse and how to start
-and curl requests
 
-Prerequisites: Docker, Docker Compose, Gradle, a recent JDK and [httpie](https://httpie.io/) are installed.
+Prerequisites: Docker, Docker Compose, Gradle, a recent JDK and [httpie](https://httpie.io/) are installed. 
+
+We show how to manually start the services and perform HTTP requests. Alternatively, below, you can find a script do
+create docker containers and use the corresponding global docker-compose file to start everything via docker-compose.
 
 Start the database
 ```bash
@@ -300,4 +301,40 @@ X-Request-Id: 603bc36b-a65b-4eaa-a2e9-f2c7e5110029
         "quantity": 10
     }
 }
+```
+
+## Using docker-compose
+
+First, create both docker images comfortably via Spring Boot
+```bash
+$ cd stock-service && gradle bootBuildImage && cd ..
+<lots of output...>
+Successfully built image 'docker.io/library/stock-service:0.0.1-SNAPSHOT'
+
+$ cd order-service && gradle bootBuildImage && cd ..
+<output...
+Successfully built image 'docker.io/library/order-service:0.0.1-SNAPSHOT'
+```
+
+Then, start the services via docker-compose
+```bash
+$ docker-compose up
+```
+
+Similar to the manual setup, all services are available via the same ports (8080 and 8081 respectively).
+
+## Summary of executed httpie commands 
+
+For convenience, here are all commands without their output for quick copy-paste:
+```bash
+http -v POST :8080/stock/1
+http -v POST :8080/stock/2
+http -v PUT :8080/stock/1 quantity=10
+http -v PUT :8080/stock/2 quantity=20
+# Successful order
+echo '{"orders":[{"productId":1,"quantity":5},{"productId":2,"quantity":10}]}'|http -v POST :8081/order
+# Non-successful order
+echo '{"orders":[{"productId":1,"quantity":100},{"productId":2,"quantity":5}]}'|http -v POST :8081/order
+http :8080/stock/1
+http :8080/stock/2
 ```
