@@ -20,7 +20,7 @@ I've added 46 design thoughts as dedicated comments marked via `REMARK` and sepa
   in addition to the integration tests.
 - In a more professional project I would have moved shared functionality, e.g. for integration tests, into a common module.
 - While there are many architectural styles (e.g. hexagonal, layered, clean, onion, etc.) I went with a very basic approach 
-  mirroring a layered design.  TODO directoy structur
+  mirroring a layered design.  
 - In a perfect world, we would have completely separated the domain models from the technical 
   models which are used for exchanging data. For the sake of simplicity, I've sometimes mixed them. Having said that, it is
   very important to keep the domain models clean and not to leak technical details into them in a real-world project.
